@@ -66,10 +66,10 @@ fi
 determine_service_tool() {
 if [[ $OS == linux ]]; then
         if command -v systemctl >/dev/null 2>&1; then
-                SERVICETOOL="systemctl status $SERVICE"
+                SERVICETOOL="systemctl status $SERVICE | grep Active"
                 LISTTOOL="systemctl"
                 if [ $USERNAME ]; then
-                    SERVICETOOL="sudo -u $USERNAME systemctl status $SERVICE"
+                    SERVICETOOL="sudo -u $USERNAME systemctl status $SERVICE | grep Active"
                     LISTTOOL="sudo -u $USERNAME systemctl"
                 fi
         elif command -v initctl >/dev/null 2>&1; then
